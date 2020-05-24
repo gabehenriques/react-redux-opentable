@@ -1,13 +1,16 @@
-version: '3.8'
+version: "3.8"
 
 services:
-  opentable:
-    build: ./
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile
     volumes:
-      - '.:/usr/src/app'
-      - '/usr/src/app/node_modules'
+      - ".:/usr/src/app"
+      - "/usr/src/app/node_modules"
     ports:
       - "3000:3000"
     environment:
-      - NODE_ENV=development
-    command: npm start
+      - CHOKIDAR_USEPOLLING=true
+    stdin_open: true
+    tty: true
