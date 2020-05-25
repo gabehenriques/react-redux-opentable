@@ -7,29 +7,44 @@ import {
   fetchRestaurantsIfNeeded,
   invalidateCity,
 } from "../actions";
-// import SearchBar from "../components/SearchBar";
 import RestaurantList from "../components/RestaurantList";
+import FormContainer from "./FormContainer";
 
 class AppContainer extends Component {
   constructor(props) {
     super(props);
+    this.handleCityChange = this.handleCityChange.bind(this);
+    this.handleAddressChange = this.handleAddressChange.bind(this);
   }
 
   componentDidMount() {
     const { dispatch, selectedCity } = this.props;
   }
 
-  componentDidUpdate(prevProps) {}
+  handleCityChange = (selectedCity) => {
+    console.log(selectedCity);
+    //this.props.dispatch(invalidateCity(selectedCity));
+    //this.props.dispatch(fetchRestaurantsIfNeeded(selectedCity));
+  };
 
-  handleChange() {}
+  handleAddressChange = (selectedAddress) => {
+    console.log(selectedAddress);
+    //this.props.dispatch(invalidateCity(selectedAddress));
+    //.props.dispatch(fetchRestaurantsIfNeeded(selectedAddress));
+  };
 
   render() {
     const { selectedCity, restaurants, isFetching, lastUpdated } = this.props;
 
     return (
       <div>
+        <FormContainer
+          onSubmit={this.handleSubmit}
+          onChangeCity={this.handleCityChange}
+          onChangeAddress={this.handleAddressChange}
+        />
         <Container>
-          <RestaurantList restaurants={this.props.restaurants} />
+          <RestaurantList restaurants={restaurants} />
         </Container>
       </div>
     );

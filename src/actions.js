@@ -61,7 +61,7 @@ const shouldRestaurants = (state, city, address) => {
   }
 };
 
-export const fetchRestaurantsIfNeeded = (city, address) => {
+export const fetchRestaurantsIfNeeded = (city, address = "") => {
   return (dispatch, getState) => {
     if (shouldRestaurants(getState(), city, address)) {
       return dispatch(fetchRestaurants(city, address));

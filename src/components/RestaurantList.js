@@ -3,7 +3,6 @@ import RestaurantDetails from "./RestaurantDetails";
 import { Container, Row, Col } from "react-bootstrap";
 
 const RestaurantList = (props) => {
-  console.log(props.restaurants);
   return (
     <Container>
       <Row>
