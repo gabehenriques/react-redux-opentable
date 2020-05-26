@@ -6,11 +6,10 @@ export const INVALIDATE_CITY = "INVALIDATE_RESTAURANT";
 
 export const ADDRESS_DATA = "ADDRESS_DATA";
 
-export const selectCity = (city, address) => {
+export const selectCity = (city) => {
   return {
     type: SELECT_CITY,
     city,
-    address,
   };
 };
 
@@ -51,7 +50,7 @@ const fetchRestaurants = (city, address) => {
 };
 
 const shouldRestaurants = (state, city, address) => {
-  const restaurants = state.restaurantReducer.city;
+  const restaurants = state.restaurantsByCity[city];
   if (!restaurants) {
     return true;
   } else if (restaurants.isFetching) {
@@ -61,7 +60,7 @@ const shouldRestaurants = (state, city, address) => {
   }
 };
 
-export const fetchRestaurantsIfNeeded = (city, address = "") => {
+export const fetchRestaurantsIfNeeded = (city, address) => {
   return (dispatch, getState) => {
     if (shouldRestaurants(getState(), city, address)) {
       return dispatch(fetchRestaurants(city, address));

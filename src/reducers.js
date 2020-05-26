@@ -10,14 +10,10 @@ const initialState = {
   isFetching: false,
   didInvalidate: false,
   restaurants: [],
-  address: "",
-  city: "",
-  total_items: 0,
-  loading: false,
-  error: null,
 };
 
 const selectedCity = (state = "", action) => {
+  console.log("action--->", action);
   switch (action.type) {
     case SELECT_CITY:
       return action.city;
@@ -44,7 +40,7 @@ const restaurants = (state = initialState, action) => {
         city: action.city,
         address: action.address,
         restaurants: action.restaurants,
-        lastUpdated: action.restaurants,
+        lastUpdated: action.receivedAt,
       });
     default:
       return state;

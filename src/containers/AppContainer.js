@@ -13,37 +13,32 @@ import FormContainer from "./FormContainer";
 class AppContainer extends Component {
   constructor(props) {
     super(props);
-    this.handleCityChange = this.handleCityChange.bind(this);
-    this.handleAddressChange = this.handleAddressChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount() {
-    const { dispatch, selectedCity } = this.props;
+  componentDidUpdate(prevProps) {
+    if (this.props.selectedCity !== prevProps.selectedCity) {
+      const { dispatch, selectedCity } = this.props;
+      dispatch(fetchRestaurantsIfNeeded(selectedCity));
+    }
   }
 
-  handleCityChange = (selectedCity) => {
-    console.log(selectedCity);
-    //this.props.dispatch(invalidateCity(selectedCity));
-    //this.props.dispatch(fetchRestaurantsIfNeeded(selectedCity));
-  };
-
-  handleAddressChange = (selectedAddress) => {
-    console.log(selectedAddress);
-    //this.props.dispatch(invalidateCity(selectedAddress));
-    //.props.dispatch(fetchRestaurantsIfNeeded(selectedAddress));
+  handleSubmit = (state) => {
+    const selectedCity = state.city;
+    const selectedAddress = state.address;
+    this.props.dispatch(selectCity(selectedCity));
+    this.props.dispatch(invalidateCity(selectedCity));
+    this.props.dispatch(
+      fetchRestaurantsIfNeeded(selectedCity, selectedAddress)
+    );
   };
 
   render() {
     const { selectedCity, restaurants, isFetching, lastUpdated } = this.props;
-
     return (
       <div>
-        <FormContainer
-          onSubmit={this.handleSubmit}
-          onChangeCity={this.handleCityChange}
-          onChangeAddress={this.handleAddressChange}
-        />
         <Container>
+          <FormContainer onSubmit={this.handleSubmit} />
           <RestaurantList restaurants={restaurants} />
         </Container>
       </div>
@@ -57,7 +52,7 @@ const mapStateToProps = (state) => {
     selectedCity
   ] || {
     isFetching: true,
-    items: [],
+    restaurants: [],
   };
 
   return {

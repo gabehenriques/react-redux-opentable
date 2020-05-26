@@ -4,20 +4,40 @@ import { Row, Col, Form, FormGroup, Button } from "react-bootstrap";
 class FormContainer extends Component {
   constructor(props) {
     super(props);
-    this.handleCityChange = this.handleCityChange.bind(this);
-    this.handleAddressChange = this.handleCityChange.bind(this);
+    this.state = {
+      city: "",
+      address: "",
+      error: "",
+    };
   }
-  handleSubmit = (event) => {
-    event.preventDefault();
-    this.props.onSubmit(event);
-  };
 
   handleCityChange = (event) => {
-    this.props.onChangeCity(event.target.value);
+    this.setState({
+      city: event.target.value,
+    });
   };
 
   handleAddressChange = (event) => {
-    this.props.onChangeAddress(event.target.value);
+    this.setState({
+      address: event.target.value,
+    });
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const { city, address, error } = this.state;
+
+    if (!city) {
+      this.setState({
+        error: "Please enter a city name",
+      });
+    } else {
+      this.setState({
+        error: "",
+      });
+
+      this.props.onSubmit(this.state);
+    }
   };
 
   render() {
@@ -52,6 +72,10 @@ class FormContainer extends Component {
             >
               Search
             </Button>
+
+            {this.state.error ? (
+              <p className="text-danger">{this.state.error}</p>
+            ) : null}
           </Form>
         </Col>
       </Row>
