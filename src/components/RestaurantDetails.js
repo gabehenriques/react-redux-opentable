@@ -5,14 +5,16 @@ const RestaurantDetails = (props) => {
   const restaurant = props.restaurant;
 
   return (
-    <Card style={{ width: "18rem" }}>
+    <Card>
       <Card.Body>
         <Card.Title>{restaurant.name}</Card.Title>
         <Card.Subtitle>
           {restaurant.address}, {restaurant.city}{" "}
         </Card.Subtitle>
         <Card.Text>Price: {restaurant.price}</Card.Text>
-        <Button href={restaurant.reserve_url}>Reserve</Button>
+        <Button href={restaurant.reserve_url} target="_blank">
+          Reserve
+        </Button>
       </Card.Body>
     </Card>
   );

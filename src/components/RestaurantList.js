@@ -4,7 +4,7 @@ import { Container, Row, Col } from "react-bootstrap";
 
 const RestaurantList = (props) => {
   return (
-    <Container>
+    <Container className="mt-5">
       <Row>
         {props.restaurants && props.restaurants.length > 0
           ? props.restaurants.map((restaurant) => {
