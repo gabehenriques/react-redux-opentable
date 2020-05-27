@@ -2,7 +2,7 @@ import fetch from "cross-fetch";
 export const REQUEST_RESTAURANTS = "REQUEST_RESTAURANTS";
 export const RECEIVE_RESTAURANTS = "RECEIVE_RESTAURANTS";
 export const SELECT_CITY = "SELECT_CITY";
-export const INVALIDATE_CITY = "INVALIDATE_RESTAURANT";
+export const INVALIDATE_CITY = "INVALIDATE_CITY";
 
 export const ADDRESS_DATA = "ADDRESS_DATA";
 
