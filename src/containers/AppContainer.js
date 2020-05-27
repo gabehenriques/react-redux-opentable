@@ -40,7 +40,11 @@ class AppContainer extends Component {
       <div>
         <Container>
           <FormContainer onSubmit={this.handleSubmit} />
-          <RestaurantList restaurants={restaurants} />
+          <RestaurantList
+            restaurants={restaurants}
+            city={selectedCity}
+            isFetching={isFetching}
+          />
         </Container>
       </div>
     );
