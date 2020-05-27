@@ -9,6 +9,7 @@ import {
 } from "../actions";
 import RestaurantList from "../components/RestaurantList";
 import FormContainer from "./FormContainer";
+import { getVisibleRestaurants } from "../selector";
 
 class AppContainer extends Component {
   constructor(props) {
@@ -48,12 +49,16 @@ class AppContainer extends Component {
 
 const mapStateToProps = (state) => {
   const { selectedCity, restaurantsByCity } = state;
-  const { isFetching, lastUpdated, restaurants } = restaurantsByCity[
+  let { isFetching, lastUpdated, restaurants } = restaurantsByCity[
     selectedCity
   ] || {
     isFetching: true,
     restaurants: [],
   };
+
+  if (selectedCity) {
+    restaurants = getVisibleRestaurants(restaurantsByCity[selectedCity]);
+  }
 
   return {
     selectedCity,

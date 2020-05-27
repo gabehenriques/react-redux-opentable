@@ -13,7 +13,6 @@ const initialState = {
 };
 
 const selectedCity = (state = "", action) => {
-  console.log("action--->", action);
   switch (action.type) {
     case SELECT_CITY:
       return action.city;
