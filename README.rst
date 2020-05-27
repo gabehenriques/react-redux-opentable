@@ -6,10 +6,10 @@ This project provides a simple interface to consume the `OpenTable API`_ using R
 
 Running
 --------
+.. code-block:: console
 
+    docker-compose up --build
 
-Technical Q&A
---------------
 
 .. _`OpenTable API`: https://github.com/sosedoff/opentable
 .. _React: https://github.com/facebook/react
